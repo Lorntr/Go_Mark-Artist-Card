@@ -1,0 +1,92 @@
+/* Copy of site-card styles synchronized to root so root index.html shows the same look */
+
+:root{
+  --bg: #ffffff;
+  --primary: #7EC8FF; /* subtle light-blue accent for decorative elements */
+  --accent: #00A3FF; /* brighter accessible blue accent for controls */
+  --muted: rgba(255,255,255,0.85); /* muted text on dark background */
+  /* make supporting text white to match request */
+  --card-text: rgba(255,255,255,0.95);
+  --text: #ffffff; /* primary heading text on the page/card */
+  --elevation: 0 30px 80px rgba(4,12,30,0.18);
+  --transition-fast: 240ms;
+  --transition-medium: 420ms;
+  --radius: 16px;
+  --glass: rgba(255,255,255,0.6);
+  --shadow: 0 6px 20px rgba(10,18,30,0.08);
+  --card-width: 520px;
+}
+
+*{box-sizing:border-box}
+.body-root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; color:var(--text); margin:0; height:100%}
+html,body{height:100%;margin:0;overflow-x:hidden}
+
+/* page background: replicate screenshot gradient - soft top blue, deep bottom, subtle vignette */
+body{
+  background:
+    radial-gradient(1200px 420px at 8% 28%, rgba(255,255,255,0.03), rgba(255,255,255,0) 30%),
+    linear-gradient(180deg, #2b6fa6 0%, #123c5a 45%, #041826 100%);
+}
+
+/* ensure default document text color is white */
+body{color:var(--text)}
+
+/* container becomes a centered frame that holds a compact card */
+.container{display:grid;place-items:center;min-height:100vh;padding:32px}
+
+/* Centered card with stronger contrast and modest max-width so the page doesn't look empty */
+.site-card{display:grid;grid-template-columns:320px 1fr;align-items:center;gap:40px;width:min(1100px,92%);background:linear-gradient(180deg, rgba(126,200,255,0.10) 0%, rgba(5,32,74,0.06) 100%);border-radius:18px;padding:40px;box-shadow:var(--elevation);border:1px solid rgba(255,255,255,0.06);min-height:320px;opacity:0;transform:translateY(10px) scale(.998);animation:card-enter var(--transition-medium) cubic-bezier(.2,.9,.2,1) both}
+
+.avatar{width:280px;height:280px;border-radius:14px;object-fit:cover;flex:0 0 auto;border:8px solid rgba(0,163,255,0.95);background:linear-gradient(180deg, rgba(126,200,255,0.10), rgba(255,255,255,0.04));transition:border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease}
+
+.info{flex:1;display:flex;flex-direction:column;gap:8px}
+.name{font-size:clamp(28px,4.8vw,48px);margin:0;font-weight:700;display:flex;align-items:center;gap:12px;color:var(--text)}
+.dash{color:var(--accent);font-weight:600;transition:color var(--transition-fast) ease}
+.role{margin:0;color:var(--card-text);font-size:1.05rem}
+.bio{margin:12px 0 20px;color:var(--card-text);opacity:0.98;max-width:68ch;font-size:1.05rem;line-height:1.45;transition:color var(--transition-fast) ease,opacity var(--transition-fast) ease}
+
+.actions{display:flex;align-items:center;gap:18px;margin-top:12px}
+.btn{background:var(--accent);color:#00243a;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:800;box-shadow:0 18px 36px rgba(0,163,255,0.18);transition:background-color var(--transition-fast) ease,box-shadow var(--transition-fast) ease,transform var(--transition-fast) ease}
+.btn:focus{outline:3px solid rgba(0,163,255,0.32);outline-offset:3px}
+.btn:hover{transform:translateY(-3px);box-shadow:0 28px 48px rgba(0,163,255,0.22)}
+
+/* Unified button focus/shadow uses blue accent */
+.btn{box-shadow:0 6px 18px rgba(0,163,255,0.18)}
+.btn:focus{outline:3px solid rgba(0,163,255,0.28)}
+
+.socials{display:flex;gap:8px}
+.social{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:10px;color:var(--accent);background:transparent;text-decoration:none;border:1px solid rgba(255,255,255,0.06);transition:border-color var(--transition-fast) ease,color var(--transition-fast) ease,transform var(--transition-fast) ease}
+.social svg{display:block}
+.social:focus{outline:3px solid rgba(0,87,217,0.25)}
+.social:hover{transform:translateY(-4px)}
+
+.theme-switcher{display:none}
+
+
+@media (max-width:1000px){
+  .site-card{grid-template-columns:220px 1fr;padding:32px;gap:24px}
+  .avatar{width:200px;height:200px;border-radius:12px;border-width:8px}
+  .name{font-size:clamp(26px,5.5vw,40px)}
+  .bio{font-size:1rem}
+}
+
+@media (max-width:720px){
+  .site-card{grid-template-columns:1fr;grid-auto-rows:min-content;padding:28px;align-items:start;gap:18px;height:auto;min-height:0}
+  .avatar{width:140px;height:140px;margin:0 auto;border-radius:12px}
+  .info{align-items:center;text-align:center}
+  .actions{justify-content:center}
+}
+
+@media (max-width:420px){
+  .site-card{padding:18px;gap:12px}
+  .avatar{width:112px;height:112px}
+  .name{font-size:clamp(20px,7vw,28px)}
+  .bio{font-size:0.95rem}
+}
+
+@keyframes card-enter{
+  from{opacity:0;transform:translateY(10px) scale(.998)}
+  to{opacity:1;transform:none}
+}
+
+/* (theme switching removed) */
